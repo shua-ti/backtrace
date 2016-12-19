@@ -9,7 +9,7 @@ def loading(weight,c1):
     pattern = []
     p = [0] * len(weight)
     def load(c1, k=0, cw=0):
-        if cw > c1: return    #边界体条件
+        if cw > c1: return    #边界条件
         if k == len(weight):
             if cw <= c1:
                 bestw.append(cw)
@@ -17,11 +17,9 @@ def loading(weight,c1):
                 pattern.append(p_copy)
             return
         #第k个货物装上箱
-        cw += weight[k]
         p[k] = 1
-        load(c1, k + 1, cw)
-        #第k个货物不装上箱
-        cw -= weight[k]              
+        load(c1, k + 1, cw+weight[k])
+        #第k个货物不装上箱             
         p[k] = 0
         load(c1, k + 1, cw)
     load(c1)
